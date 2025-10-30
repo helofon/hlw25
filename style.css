@@ -1,0 +1,567 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+:root {
+    --halloween-dark: hsl(260, 100%, 6%);
+    --halloween-purple: hsl(280, 100%, 12%);
+    --halloween-orange: hsl(24, 100%, 54%);
+    --halloween-gold: hsl(38, 45%, 52%);
+    --halloween-beige: hsl(37, 40%, 80%);
+    --halloween-red: hsl(0, 100%, 27%);
+}
+
+body {
+    font-family: Georgia, serif;
+    overflow-x: hidden;
+}
+
+#app {
+    position: relative;
+    min-height: 100vh;
+    overflow: hidden;
+}
+
+.halloween-bg {
+    background: linear-gradient(135deg, var(--halloween-dark) 0%, var(--halloween-purple) 100%);
+}
+
+/* Background animations */
+#background {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    overflow: hidden;
+}
+
+/* Screens */
+.screen {
+    position: relative;
+    z-index: 10;
+    min-height: 100vh;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+}
+
+.screen.active {
+    display: flex;
+}
+
+/* Envelope Screen */
+.envelope-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+
+.title-container {
+    text-align: center;
+}
+
+.main-title {
+    font-size: clamp(2rem, 8vw, 4rem);
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    color: var(--halloween-orange);
+    text-shadow: 0 0 20px rgba(255, 122, 0, 0.5), 0 0 40px rgba(255, 122, 0, 0.3);
+    margin-bottom: 0.5rem;
+}
+
+.subtitle {
+    font-size: 1.125rem;
+    font-weight: 300;
+    color: var(--halloween-beige);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.envelope-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+}
+
+/* Candles */
+.candle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+@media (max-width: 768px) {
+    .candle {
+        display: none;
+    }
+}
+
+.flame {
+    width: 12px;
+    height: 32px;
+    background-color: var(--halloween-orange);
+    border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+}
+
+.candle-body {
+    width: 16px;
+    height: 64px;
+    background-color: #2d2d2d;
+    border-radius: 4px;
+}
+
+.candle-base {
+    width: 24px;
+    height: 8px;
+    background-color: #1a1a1a;
+    border-radius: 50%;
+}
+
+/* Envelope */
+.envelope {
+    position: relative;
+    width: 320px;
+    height: 200px;
+}
+
+.envelope.shake {
+    animation: shake 0.5s ease-in-out;
+}
+
+.envelope-body {
+    position: absolute;
+    inset: 0;
+    background-color: var(--halloween-beige);
+    border: 2px solid var(--halloween-gold);
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.wax-seal {
+    width: 64px;
+    height: 64px;
+    background-color: var(--halloween-red);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5), inset 0 -4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.envelope-flap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    width: 0;
+    height: 0;
+    border-left: 160px solid transparent;
+    border-right: 160px solid transparent;
+    border-top: 100px solid var(--halloween-gold);
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.5));
+}
+
+.open-button {
+    padding: 1.5rem 2rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    font-family: Georgia, serif;
+    background-color: transparent;
+    border: 2px solid var(--halloween-gold);
+    color: var(--halloween-gold);
+    border-radius: 9999px;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(187, 134, 76, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.open-button:hover {
+    transform: scale(1.1);
+}
+
+/* Letter Screen */
+.letter-container {
+    max-width: 42rem;
+    width: 100%;
+}
+
+.letter {
+    background-color: var(--halloween-beige);
+    background-image: 
+        linear-gradient(rgba(139, 69, 19, 0.1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(139, 69, 19, 0.1) 1px, transparent 1px),
+        radial-gradient(circle at 30% 30%, rgba(139, 69, 19, 0.15), transparent 70%);
+    background-size: 20px 20px, 20px 20px, 100% 100%;
+    padding: 3rem;
+    border-radius: 8px;
+    border: 1px solid var(--halloween-gold);
+    box-shadow: 
+        0 30px 80px rgba(0, 0, 0, 0.8),
+        inset 0 0 80px rgba(139, 69, 19, 0.1),
+        inset 0 0 30px rgba(0, 0, 0, 0.3);
+}
+
+.ornament-top {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.line {
+    width: 80px;
+    height: 2px;
+    opacity: 0.3;
+    background: var(--halloween-gold);
+}
+
+.line-left {
+    background: linear-gradient(to right, transparent, var(--halloween-gold));
+}
+
+.line-right {
+    background: linear-gradient(to left, transparent, var(--halloween-gold));
+}
+
+.icon {
+    font-size: 2.5rem;
+}
+
+.letter-title {
+    font-size: clamp(1.5rem, 5vw, 3rem);
+    text-align: center;
+    margin-bottom: 2rem;
+    color: var(--halloween-orange);
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3), 0 0 20px rgba(255, 122, 0, 0.5);
+    letter-spacing: 0.05em;
+    line-height: 1.3;
+}
+
+.separator {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-bottom: 2rem;
+    opacity: 0.5;
+}
+
+.separator span {
+    font-size: 1.25rem;
+}
+
+.separator-line {
+    width: 128px;
+    height: 1px;
+    background-color: var(--halloween-gold);
+}
+
+.letter-body {
+    color: #2C1810;
+    text-align: center;
+}
+
+.intro-text {
+    font-size: 1.125rem;
+    line-height: 1.8;
+    font-style: italic;
+    margin-bottom: 2rem;
+}
+
+.event-details {
+    padding-top: 1.5rem;
+    margin-bottom: 2rem;
+}
+
+.detail-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 1rem;
+}
+
+.detail-icon {
+    font-size: 1.5rem;
+}
+
+.detail-item p {
+    font-size: 1.125rem;
+    font-weight: 600;
+}
+
+.dress-code {
+    padding-top: 2rem;
+    border-top: 1px solid rgba(44, 24, 16, 0.3);
+    margin-bottom: 1.5rem;
+}
+
+.dress-code p {
+    font-size: 1rem;
+    font-style: italic;
+}
+
+.quote {
+    padding-top: 1.5rem;
+}
+
+.quote p {
+    font-size: 0.875rem;
+    opacity: 0.7;
+}
+
+.ornament-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 2rem;
+}
+
+.ornament-bottom span {
+    font-size: 1.5rem;
+}
+
+.line-short {
+    width: 64px;
+    height: 1px;
+    background-color: var(--halloween-gold);
+}
+
+/* Confirm Button */
+.confirm-container {
+    position: fixed;
+    bottom: 3rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 30;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+}
+
+.confirm-text {
+    font-size: 1.125rem;
+    font-weight: 300;
+    color: var(--halloween-gold);
+    text-shadow: 0 0 10px rgba(187, 134, 76, 0.5);
+    animation: pulse 2s ease-in-out infinite;
+}
+
+.confirm-button {
+    position: relative;
+    padding: 1.5rem 2rem;
+    font-size: 1.125rem;
+    font-weight: 600;
+    font-family: Georgia, serif;
+    background-color: transparent;
+    border: 2px solid var(--halloween-gold);
+    color: var(--halloween-gold);
+    border-radius: 9999px;
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(187, 134, 76, 0.3), 0 0 60px rgba(255, 122, 0, 0.2);
+    transition: transform 0.3s ease;
+    overflow: hidden;
+}
+
+.confirm-button:hover {
+    transform: scale(1.1);
+}
+
+.confirm-button:hover::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(circle, rgba(255, 122, 0, 0.2) 0%, transparent 70%);
+    opacity: 1;
+}
+
+/* Toast */
+.toast {
+    position: fixed;
+    top: 2rem;
+    left: 50%;
+    transform: translateX(-50%) translateY(-200%);
+    padding: 1rem 2rem;
+    background-color: var(--halloween-dark);
+    color: var(--halloween-orange);
+    border: 1px solid var(--halloween-gold);
+    border-radius: 8px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+    font-size: 1rem;
+    z-index: 1000;
+    transition: transform 0.3s ease;
+}
+
+.toast.show {
+    transform: translateX(-50%) translateY(0);
+}
+
+/* Particles */
+#particles {
+    position: fixed;
+    inset: 0;
+    pointer-events: none;
+    z-index: 999;
+}
+
+.particle {
+    position: absolute;
+    font-size: 1.5rem;
+    pointer-events: none;
+}
+
+/* Animations */
+@keyframes flame {
+    0%, 100% {
+        transform: scaleY(1) translateY(0);
+        opacity: 1;
+    }
+    50% {
+        transform: scaleY(1.1) translateY(-2px);
+        opacity: 0.9;
+    }
+}
+
+.flame-flicker {
+    animation: flame 2s ease-in-out infinite;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    25% {
+        transform: translateX(-5px) rotate(-1deg);
+    }
+    75% {
+        transform: translateX(5px) rotate(1deg);
+    }
+}
+
+@keyframes glitch {
+    0%, 90%, 100% {
+        transform: translate(0);
+    }
+    92% {
+        transform: translate(-2px, 1px);
+    }
+    94% {
+        transform: translate(2px, -1px);
+    }
+    96% {
+        transform: translate(-1px, 2px);
+    }
+}
+
+.glitch {
+    animation: glitch 3s ease-in-out infinite;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.animate-fade-in {
+    animation: fadeIn 1s ease-out;
+}
+
+@keyframes scaleIn {
+    from {
+        transform: scale(0.8);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.animate-scale-in {
+    animation: scaleIn 0.8s ease-out;
+}
+
+@keyframes pulse {
+    0%, 100% {
+        opacity: 1;
+    }
+    50% {
+        opacity: 0.5;
+    }
+}
+
+/* Background elements */
+.witch {
+    position: absolute;
+    animation: fly 15s linear infinite;
+}
+
+@keyframes fly {
+    0% {
+        left: -10%;
+    }
+    100% {
+        left: 110%;
+    }
+}
+
+.fog {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    opacity: 0.3;
+    animation: fog 20s ease-in-out infinite;
+}
+
+@keyframes fog {
+    0%, 100% {
+        transform: translateX(0) scale(1);
+        opacity: 0.3;
+    }
+    50% {
+        transform: translateX(100px) scale(1.1);
+        opacity: 0.5;
+    }
+}
+
+.float-particle {
+    position: absolute;
+    border-radius: 50%;
+    animation: float 6s ease-in-out infinite;
+}
+
+@keyframes float {
+    0%, 100% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.8;
+    }
+    50% {
+        transform: translateY(-20px) translateX(10px);
+        opacity: 1;
+    }
+}
+
+@keyframes particleExplosion {
+    0% {
+        transform: translate(0, 0) scale(1);
+        opacity: 1;
+    }
+    100% {
+        transform: var(--particle-end) scale(0);
+        opacity: 0;
+    }
+}

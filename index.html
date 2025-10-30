@@ -1,25 +1,150 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>🎃 Convite Especial - Halloween 2025</title>
-    <meta name="description" content="Você foi convidado para uma noite misteriosa e inesquecível. Abra o envelope e descubra o que te espera." />
-
-    <meta property="og:title" content="🎃 Convite Especial" />
-    <meta property="og:type" content="website" />
-    <meta property="og:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:site" content="@lovable_dev" />
-    <meta name="twitter:image" content="https://lovable.dev/opengraph-image-p98pqg.png" />
+    <meta name="description" content="Você foi convidado para uma noite misteriosa e inesquecível. Abra o envelope e descubra o que te espera.">
+    <meta name="author" content="Halloween Invite">
     
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  </head>
+    <meta property="og:title" content="🎃 Convite Especial - Halloween 2025">
+    <meta property="og:description" content="Junte-se a nós para a Noite das Sombras">
+    <meta property="og:type" content="website">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="app" class="halloween-bg">
+        <!-- Background animado -->
+        <div id="background"></div>
 
-  <body>
-    <div id="root"></div>
-    <script type="module" src="/src/main.tsx"></script>
-  </body>
+        <!-- Tela do envelope -->
+        <div id="envelope-screen" class="screen active">
+            <div class="envelope-container">
+                <div class="title-container animate-fade-in">
+                    <h1 class="main-title glitch">🎃 CONVITE ESPECIAL 🎃</h1>
+                    <p class="subtitle">Você recebeu uma mensagem misteriosa...</p>
+                </div>
+
+                <div class="envelope-wrapper">
+                    <!-- Vela esquerda -->
+                    <div class="candle candle-left">
+                        <div class="flame flame-flicker"></div>
+                        <div class="candle-body"></div>
+                        <div class="candle-base"></div>
+                    </div>
+
+                    <!-- Envelope -->
+                    <div id="envelope" class="envelope">
+                        <div class="envelope-body">
+                            <div class="wax-seal">🦇</div>
+                        </div>
+                        <div class="envelope-flap"></div>
+                    </div>
+
+                    <!-- Vela direita -->
+                    <div class="candle candle-right">
+                        <div class="flame flame-flicker" style="animation-delay: 0.5s;"></div>
+                        <div class="candle-body"></div>
+                        <div class="candle-base"></div>
+                    </div>
+                </div>
+
+                <button id="open-btn" class="open-button">✨ Abrir Convite ✨</button>
+            </div>
+        </div>
+
+        <!-- Tela da carta -->
+        <div id="letter-screen" class="screen">
+            <div class="letter-container animate-scale-in">
+                <div class="letter paper-texture">
+                    <!-- Ornamento superior -->
+                    <div class="ornament-top">
+                        <div class="line line-left"></div>
+                        <span class="icon">🦇</span>
+                        <div class="line line-right"></div>
+                    </div>
+
+                    <!-- Título -->
+                    <h1 class="letter-title glitch">
+                        🎃 VOCÊ ESTÁ CONVIDADO<br>
+                        PARA A NOITE DAS SOMBRAS 🎃
+                    </h1>
+
+                    <!-- Separador -->
+                    <div class="separator">
+                        <span>☠️</span>
+                        <div class="separator-line"></div>
+                        <span>☠️</span>
+                    </div>
+
+                    <!-- Corpo do texto -->
+                    <div class="letter-body">
+                        <p class="intro-text animate-fade-in">
+                            Junte-se a nós para uma noite de mistério,<br>
+                            onde as sombras ganham vida e os espíritos dançam.<br>
+                            Uma celebração além do véu da realidade.
+                        </p>
+
+                        <div class="event-details">
+                            <div class="detail-item">
+                                <span class="detail-icon">📅</span>
+                                <p>31 de Outubro, 2025</p>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">🕐</span>
+                                <p>A partir das 20:00h</p>
+                            </div>
+                            <div class="detail-item">
+                                <span class="detail-icon">🏰</span>
+                                <p>Mansão das Sombras Eternas</p>
+                            </div>
+                        </div>
+
+                        <div class="dress-code">
+                            <p>
+                                Traje: Fantasia obrigatória 👻<br>
+                                Os desavisados serão transformados em abóboras 🎃
+                            </p>
+                        </div>
+
+                        <div class="quote">
+                            <p>
+                                "Quando o relógio marca meia-noite,<br>
+                                as almas perdidas encontram seu caminho..."
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Ornamento inferior -->
+                    <div class="ornament-bottom">
+                        <span>🕷️</span>
+                        <div class="line-short"></div>
+                        <span>🕸️</span>
+                        <div class="line-short"></div>
+                        <span>🕷️</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Botão de confirmação -->
+            <div class="confirm-container">
+                <p class="confirm-text">Clique aqui para confirmar sua presença</p>
+                <button id="confirm-btn" class="confirm-button glitch">
+                    ✨ Confirmar Presença ✨
+                </button>
+            </div>
+        </div>
+
+        <!-- Toast notification -->
+        <div id="toast" class="toast">
+            🎃 Presença confirmada! Nos vemos na Noite das Sombras!
+        </div>
+
+        <!-- Partículas de confirmação -->
+        <div id="particles"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
 </html>
