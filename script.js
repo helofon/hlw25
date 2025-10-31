@@ -6,7 +6,6 @@ const envelopeScreen = document.getElementById('envelope-screen');
 const letterScreen = document.getElementById('letter-screen');
 const envelope = document.getElementById('envelope');
 const openBtn = document.getElementById('open-btn');
-const confirmBtn = document.getElementById('confirm-btn');
 const toast = document.getElementById('toast');
 const background = document.getElementById('background');
 const particlesContainer = document.getElementById('particles');
@@ -90,43 +89,8 @@ function openEnvelope() {
     }, 500);
 }
 
-// Confirmar presença
-function confirmPresence(e) {
-    const rect = e.target.getBoundingClientRect();
-    const centerX = rect.left + rect.width / 2;
-    const centerY = rect.top + rect.height / 2;
-
-    // Criar partículas
-    for (let i = 0; i < 12; i++) {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-        particle.textContent = '✨';
-        particle.style.left = `${centerX}px`;
-        particle.style.top = `${centerY}px`;
-        
-        const endX = Math.random() * 200 - 100;
-        const endY = Math.random() * 200 - 100;
-        particle.style.setProperty('--particle-end', `translate(${endX}px, ${endY}px)`);
-        particle.style.animation = `particleExplosion 1s ease-out forwards`;
-        particle.style.animationDelay = `${i * 0.05}s`;
-        
-        particlesContainer.appendChild(particle);
-        
-        setTimeout(() => particle.remove(), 1000 + (i * 50));
-    }
-
-    // Mostrar toast
-    setTimeout(() => {
-        toast.classList.add('show');
-        setTimeout(() => {
-            toast.classList.remove('show');
-        }, 5000);
-    }, 500);
-}
-
 // Event Listeners
 openBtn.addEventListener('click', openEnvelope);
-confirmBtn.addEventListener('click', confirmPresence);
 
 // Inicializar
 createBackground();
